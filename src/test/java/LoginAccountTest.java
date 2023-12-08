@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import pages.MainPage;
+import pages.LoginPage;
 
 import static org.junit.Assert.assertTrue;
 
@@ -25,8 +25,8 @@ public class LoginAccountTest {
         user = new User().generateUser();
         userClient = new UserClient();
         RestAssured.baseURI = UrlConfig.BASE_URL;
-        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "reg");
-//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "reg");
+        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "login");
+//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "login");
     }
 
     @After
@@ -43,13 +43,13 @@ public class LoginAccountTest {
     @Test
     @DisplayName("Вход в Личный кабинет")
     public void loginAccountButtonTest() {
-        boolean isProfileHeaderVisible = new MainPage(driver)
-                .clickToAccountButton()
-                .inputEmail(user.getEmail())
-                .inputPassword(user.getPassword())
+        boolean isCheckoutOrderButtonVisible = new LoginPage(driver)
+                .inputEmail("ffff@ff.ff")
+                .inputPassword("123456")
                 .clickEnterButton()
+                .clickStellarIsBurgerLogo()
                 .clickPersonalAreaButtonWhileAlreadyLogin()
                 .isProfileHeaderVisible();
-        assertTrue("Вход в личный кабинет не выполнен", isProfileHeaderVisible);
+        assertTrue("Вход в личный кабинет не выполнен", isCheckoutOrderButtonVisible);
     }
 }

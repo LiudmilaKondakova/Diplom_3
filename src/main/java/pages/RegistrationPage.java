@@ -10,13 +10,12 @@ public class RegistrationPage {
         this.driver = driver;
     }
 
-    private final By nameField = By.xpath("/html/body/div/div/main/div/form/fieldset[1]/div/div");
-    private final By emailField = By.xpath("/html/body/div/div/main/div/form/fieldset[2]/div/div/label");
-    private final By passwordField = By.xpath("/html/body/div/div/main/div/form/fieldset[3]/div/div");
+    private final By nameField = By.xpath("/html/body/div/div/main/div/form/fieldset[1]/div/div/input");
+    private final By emailField = By.xpath("/html/body/div/div/main/div/form/fieldset[2]/div/div/input");
+    private final By passwordField = By.xpath("/html/body/div/div/main/div/form/fieldset[3]/div/div/input");
     private final By registrationButton = By.xpath("/html/body/div/div/main/div/form/button");
     private final By incorrectPasswordError = By.xpath("/html/body/div/div/main/div/form/fieldset[3]/div/p");
     private final By enterButton = By.xpath("/html/body/div/div/main/div/div/p/a");
-    private final By enterButtonNotLogin = By.xpath("/html/body/div/div/main/div/div/p/a");
 
     public RegistrationPage inputName(String name) {
         driver.findElement(nameField).sendKeys(name);
@@ -50,10 +49,5 @@ public class RegistrationPage {
 
     public boolean isIncorrectPasswordError() {
         return driver.findElement(incorrectPasswordError).isDisplayed();
-    }
-
-    public LoginPage clickEnterButtonNotLogin() {
-        driver.findElement(enterButtonNotLogin).click();
-        return new LoginPage(driver);
     }
 }

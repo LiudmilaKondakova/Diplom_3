@@ -10,11 +10,10 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    private final By enterLoginHeader = By.xpath("/html/body/div/div/main/div/h2");
-    private final By emailField = By.xpath("/html/body/div/div/main/div/form/fieldset[1]/div/div/input");
+    private final By enterLoginHeader = By.xpath("//*[@id=\"root\"]/div/header/nav/a");
+    private final By emailField = By.cssSelector("#root > div > main > div > form > fieldset:nth-child(1) > div > div > input");
     private final By passwordField = By.xpath("/html/body/div/div/main/div/form/fieldset[2]/div/div/input");
-    private final By enterButton = By.xpath("/html/body/div/div/main/div/form/button");
-
+    private final By enterButton = By.cssSelector("#root > div > main > div > form > button");
     private final By toRegistrationButton = By.xpath("/html/body/div/div/main/div/div/p[1]/a");
     private final By recoverPasswordButton = By.xpath("/html/body/div/div/main/div/div/p[2]/a");
     private final By stellarIsBurgerLogo = By.xpath("/html/body/div/div/header/nav/div/a");
@@ -29,9 +28,9 @@ public class LoginPage {
         return this;
     }
 
-    public MainPage clickEnterButton() {
+    public LoginPage clickEnterButton() {
         driver.findElement(enterButton).click();
-        return new MainPage(driver);
+        return new LoginPage(driver);
     }
 
     public RegistrationPage clickToRegistrationButton() {

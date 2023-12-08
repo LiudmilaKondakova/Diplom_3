@@ -15,13 +15,11 @@ public class WebDriverFactory {
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
-//                options.addArguments("--remote-allow-origins=*");
                 driver = new ChromeDriver(options);
                 break;
             case "yandex":
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver3.exe");
                 ChromeOptions yandexOptions = new ChromeOptions();
-//                yandexOptions.addArguments("--remote-allow-origins=*");
                 yandexOptions.setBinary("C:\\Users\\Alexa\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
                 driver = new ChromeDriver(yandexOptions);
                 break;

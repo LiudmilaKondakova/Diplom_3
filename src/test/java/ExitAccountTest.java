@@ -26,8 +26,8 @@ public class ExitAccountTest {
         user = new User().generateUser();
         userClient = new UserClient();
         RestAssured.baseURI = UrlConfig.BASE_URL;
-        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "reg");
-//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "reg");
+        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "login");
+//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "login");
     }
 
     @After
@@ -45,16 +45,12 @@ public class ExitAccountTest {
     @DisplayName("Выход из аккаунта по кнопке «Выйти» в личном кабинете")
     public void exitAccountButtonTest() {
         boolean isCheckoutOrderButtonVisible = new LoginPage(driver)
-                .clickStellarIsBurgerLogo()
-                .clickToAccountButton()
-//                .clickToRegistrationButton()
-//                .clickEnterButton()
-                .inputEmail(user.getEmail())
-                .inputPassword(user.getPassword())
+                .inputEmail("ffff@ff.ff")
+                .inputPassword("123456")
                 .clickEnterButton()
+                .clickStellarIsBurgerLogo()
                 .clickPersonalAreaButtonWhileAlreadyLogin()
                 .clickExitButton()
-                .clickStellarIsBurgerLogo()
                 .isLoginHeaderVisible();
         assertTrue("Выход из аккаунта не выполнен", isCheckoutOrderButtonVisible);
     }

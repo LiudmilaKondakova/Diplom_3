@@ -10,7 +10,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import pages.MainPage;
 import pages.RegistrationPage;
 
 import static junit.framework.TestCase.assertTrue;
@@ -28,7 +27,7 @@ public class RegistrationTest {
         user = new User().generateUser();
         userClient = new UserClient();
         RestAssured.baseURI = UrlConfig.BASE_URL;
-        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "reg");
+//        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "reg");
         driver = WebDriverFactory.get(Config.BROWSER_CHROME, "reg");
     }
 
@@ -47,8 +46,8 @@ public class RegistrationTest {
     @DisplayName("Регистрация с корректными данными")
     public void correctRegistrationTest() {
         boolean isLoginHeaderVisible = new RegistrationPage(driver)
-                .inputEmail(user.getEmail())
                 .inputName(user.getName())
+                .inputEmail(user.getEmail())
                 .inputPassword(user.getPassword())
                 .clickRegistrationButton()
                 .isLoginHeaderVisible();
@@ -58,11 +57,10 @@ public class RegistrationTest {
     @Test
     @DisplayName("Проверка регистрации с паролем менее 6 символов")
     public void passwordLessThenSixSymbolsRegistrationTest() {
-        user.setPassword(INVALID_PASSWORD);
         boolean isPasswordErrorVisible = new RegistrationPage(driver)
-                .inputEmail(user.getEmail())
                 .inputName(user.getName())
-                .inputPassword(user.getPassword())
+                .inputEmail(user.getEmail())
+                .inputPassword(user.setPassword(INVALID_PASSWORD))
                 .clickEmailField()
                 .isIncorrectPasswordError();
         assertTrue("Нет ошибки, что пароль некорректен" +

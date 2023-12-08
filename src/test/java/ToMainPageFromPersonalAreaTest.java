@@ -25,8 +25,8 @@ public class ToMainPageFromPersonalAreaTest {
         user = new User().generateUser();
         userClient = new UserClient();
         RestAssured.baseURI = UrlConfig.BASE_URL;
-        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "reg");
-        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "reg");
+        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "login");
+//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "login");
     }
 
     @After
@@ -47,6 +47,7 @@ public class ToMainPageFromPersonalAreaTest {
                 .inputEmail(user.getEmail())
                 .inputPassword(user.getPassword())
                 .clickEnterButton()
+                .clickStellarIsBurgerLogo()
                 .clickPersonalAreaButtonWhileAlreadyLogin()
                 .clickToConstructorButton()
                 .isBunsVisible();
@@ -60,6 +61,7 @@ public class ToMainPageFromPersonalAreaTest {
                 .inputEmail(user.getEmail())
                 .inputPassword(user.getPassword())
                 .clickEnterButton()
+                .clickStellarIsBurgerLogo()
                 .clickPersonalAreaButtonWhileAlreadyLogin()
                 .clickToStellarIsBurgerLogo()
                 .isBunsVisible();

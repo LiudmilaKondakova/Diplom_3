@@ -10,7 +10,7 @@ public class MainPage {
         this.driver = driver;
     }
 
-    private final By enterToAccountButton = By.xpath("/html/body/div/div/main/section[2]/div/button");
+    private final By enterToAccountButton = By.xpath("/html/body/div/div/header/nav/a/p");
     private final By personalAreaButton = By.xpath("/html/body/div/div/header/nav/a");
     private final By checkoutOrderButton = By.xpath("/html/body/div/div/main/section[2]/div/button");
     private final By stellarIsBurgerLogo = By.xpath("/html/body/div/div/header/nav/div/a/svg");

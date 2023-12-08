@@ -25,8 +25,8 @@ public class ConstructorTest {
         user = new User().generateUser();
         userClient = new UserClient();
         RestAssured.baseURI = UrlConfig.BASE_URL;
-//        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "reg");
-        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "reg");
+//        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "main");
+        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "main");
     }
 
     @After
