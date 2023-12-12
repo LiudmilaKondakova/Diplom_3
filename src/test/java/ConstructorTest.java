@@ -15,7 +15,8 @@ import pages.MainPage;
 import static org.junit.Assert.assertTrue;
 
 public class ConstructorTest {
-    private WebDriver driver;
+    private WebDriver chromeDriver;
+    private WebDriver yandexDriver;
     public UserClient userClient;
     public User user;
     public String accessToken;
@@ -25,13 +26,14 @@ public class ConstructorTest {
         user = new User().generateUser();
         userClient = new UserClient();
         RestAssured.baseURI = UrlConfig.BASE_URL;
-//        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "main");
-        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "main");
+        yandexDriver = WebDriverFactory.get(Config.BROWSER_YANDEX, "main");
+        chromeDriver = WebDriverFactory.get(Config.BROWSER_CHROME, "main");
     }
 
     @After
     public void tearDown() {
-        driver.quit();
+        if (yandexDriver != null) {yandexDriver.quit();}
+        if (chromeDriver != null) {chromeDriver.quit();}
         if (accessToken != null) userClient.delete(accessTokenExtraction(user));
     }
 
@@ -43,7 +45,7 @@ public class ConstructorTest {
     @Test
     @DisplayName("Проверка, что работает переход к разделам «Булки»")
     public void clickBunsSelectionButtonTest() {
-        boolean isBunsSelected = new MainPage(driver)
+        boolean isBunsSelected = new MainPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .clickSousesSelectionButton()
                 .clickBunsSelectionButton()
                 .isBunsVisible();
@@ -53,7 +55,7 @@ public class ConstructorTest {
     @Test
     @DisplayName("Проверка, что работает переход к разделам «Соусы»")
     public void clickSousesSelectionButtonTest() {
-        boolean isSousesSelected = new MainPage(driver)
+        boolean isSousesSelected = new MainPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .clickSousesSelectionButton()
                 .isSousesVisible();
         assertTrue("Соусы не выбраны", isSousesSelected);
@@ -62,7 +64,7 @@ public class ConstructorTest {
     @Test
     @DisplayName("Проверка, что работает переход к разделам «Начинки»")
     public void clickFillingsSelectionButton() {
-        boolean isFillingsSelected = new MainPage(driver)
+        boolean isFillingsSelected = new MainPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .clickFillingsSelectionButton()
                 .isFillingsVisible();
         assertTrue("Начинки не выбраны", isFillingsSelected);

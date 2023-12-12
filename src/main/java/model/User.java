@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 
 public class User {
     static Faker faker = new Faker();
-
     private String email;
     private String password;
     private String name;

@@ -40,7 +40,6 @@ public class WebDriverFactory {
                 break;
             default: throw new RuntimeException("URL " + url + " not exist");
         }
-
         return driver;
     }
 }

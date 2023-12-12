@@ -15,7 +15,8 @@ import pages.LoginPage;
 import static org.junit.Assert.assertTrue;
 
 public class LoginAccountTest {
-    private WebDriver driver;
+    private WebDriver chromeDriver;
+    private WebDriver yandexDriver;
     public UserClient userClient;
     public User user;
     public String accessToken;
@@ -25,13 +26,14 @@ public class LoginAccountTest {
         user = new User().generateUser();
         userClient = new UserClient();
         RestAssured.baseURI = UrlConfig.BASE_URL;
-        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "login");
-//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "login");
+        yandexDriver = WebDriverFactory.get(Config.BROWSER_YANDEX, "login");
+        chromeDriver = WebDriverFactory.get(Config.BROWSER_CHROME, "login");
     }
 
     @After
     public void tearDown() {
-        driver.quit();
+        if (yandexDriver != null) {yandexDriver.quit();}
+        if (chromeDriver != null) {chromeDriver.quit();}
         if (accessToken != null) userClient.delete(accessTokenExtraction(user));
     }
 
@@ -43,7 +45,7 @@ public class LoginAccountTest {
     @Test
     @DisplayName("Вход в Личный кабинет")
     public void loginAccountButtonTest() {
-        boolean isCheckoutOrderButtonVisible = new LoginPage(driver)
+        boolean isCheckoutOrderButtonVisible = new LoginPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .inputEmail("ffff@ff.ff")
                 .inputPassword("123456")
                 .clickEnterButton()

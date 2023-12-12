@@ -15,11 +15,11 @@ import pages.RegistrationPage;
 import static junit.framework.TestCase.assertTrue;
 
 public class RegistrationTest {
-    private WebDriver driver;
+    private WebDriver chromeDriver;
+    private WebDriver yandexDriver;
     public UserClient userClient;
     public User user;
     public String accessToken;
-
     private static final String INVALID_PASSWORD = "123";
 
     @Before
@@ -27,13 +27,14 @@ public class RegistrationTest {
         user = new User().generateUser();
         userClient = new UserClient();
         RestAssured.baseURI = UrlConfig.BASE_URL;
-//        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "reg");
-        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "reg");
+        yandexDriver = WebDriverFactory.get(Config.BROWSER_YANDEX, "reg");
+        chromeDriver = WebDriverFactory.get(Config.BROWSER_CHROME, "reg");
     }
 
     @After
     public void tearDown() {
-        driver.quit();
+        if (yandexDriver != null) {yandexDriver.quit();}
+        if (chromeDriver != null) {chromeDriver.quit();}
         if (accessToken != null) userClient.delete(accessTokenExtraction(user));
     }
 
@@ -45,7 +46,7 @@ public class RegistrationTest {
     @Test
     @DisplayName("Регистрация с корректными данными")
     public void correctRegistrationTest() {
-        boolean isLoginHeaderVisible = new RegistrationPage(driver)
+        boolean isLoginHeaderVisible = new RegistrationPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .inputName(user.getName())
                 .inputEmail(user.getEmail())
                 .inputPassword(user.getPassword())
@@ -57,7 +58,7 @@ public class RegistrationTest {
     @Test
     @DisplayName("Проверка регистрации с паролем менее 6 символов")
     public void passwordLessThenSixSymbolsRegistrationTest() {
-        boolean isPasswordErrorVisible = new RegistrationPage(driver)
+        boolean isPasswordErrorVisible = new RegistrationPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .inputName(user.getName())
                 .inputEmail(user.getEmail())
                 .inputPassword(user.setPassword(INVALID_PASSWORD))

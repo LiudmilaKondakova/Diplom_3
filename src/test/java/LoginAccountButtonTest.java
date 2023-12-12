@@ -15,7 +15,8 @@ import pages.MainPage;
 import static org.junit.Assert.assertTrue;
 
 public class LoginAccountButtonTest {
-    private WebDriver driver;
+    private WebDriver chromeDriver;
+    private WebDriver yandexDriver;
     public UserClient userClient;
     public User user;
     public String accessToken;
@@ -29,7 +30,8 @@ public class LoginAccountButtonTest {
 
     @After
     public void tearDown() {
-        driver.quit();
+        if (yandexDriver != null) {yandexDriver.quit();}
+        if (chromeDriver != null) {chromeDriver.quit();}
         if (accessToken != null) userClient.delete(accessTokenExtraction(user));
     }
 
@@ -41,10 +43,10 @@ public class LoginAccountButtonTest {
     @Test
     @DisplayName("Вход по кнопке «Войти в аккаунт» на главной")
     public void loginToLoginButtonTest() {
-        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "main");
-//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "main");
+        yandexDriver = WebDriverFactory.get(Config.BROWSER_YANDEX, "main");
+        chromeDriver = WebDriverFactory.get(Config.BROWSER_CHROME, "main");
         userClient.create(user);
-        boolean isCheckoutOrderButtonVisible = new MainPage(driver)
+        boolean isCheckoutOrderButtonVisible = new MainPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .clickToAccountButton()
                 .inputEmail(user.getEmail())
                 .inputPassword(user.getPassword())
@@ -57,10 +59,10 @@ public class LoginAccountButtonTest {
     @Test
     @DisplayName("Вход через кнопку «Личный кабинет»")
     public void loginToPersonalAccountButtonTest() {
-        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "main");
-//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "main");
+        yandexDriver = WebDriverFactory.get(Config.BROWSER_YANDEX, "main");
+        chromeDriver = WebDriverFactory.get(Config.BROWSER_CHROME, "main");
         userClient.create(user);
-        boolean isCheckoutOrderButtonVisible = new MainPage(driver)
+        boolean isCheckoutOrderButtonVisible = new MainPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .clickPersonalAreaButtonWhileIsNotLogin()
                 .inputEmail(user.getEmail())
                 .inputPassword(user.getPassword())
@@ -73,10 +75,10 @@ public class LoginAccountButtonTest {
     @Test
     @DisplayName("Вход через кнопку в форме регистрации")
     public void enterToRegistrationButton() {
-        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "login");
-//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "login");
+        yandexDriver = WebDriverFactory.get(Config.BROWSER_YANDEX, "login");
+        chromeDriver = WebDriverFactory.get(Config.BROWSER_CHROME, "login");
         userClient.create(user);
-        boolean isCheckoutOrderButtonVisible = new LoginPage(driver)
+        boolean isCheckoutOrderButtonVisible = new LoginPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .clickToRegistrationButton()
                 .inputEmail(user.getEmail())
                 .inputPassword(user.getPassword())
@@ -89,10 +91,10 @@ public class LoginAccountButtonTest {
     @Test
     @DisplayName("Вход через кнопку в форме восстановления пароля")
     public void enterToPasswordRecoverButton() {
-        driver = WebDriverFactory.get(Config.BROWSER_YANDEX, "login");
-//        driver = WebDriverFactory.get(Config.BROWSER_CHROME, "login");
+        yandexDriver = WebDriverFactory.get(Config.BROWSER_YANDEX, "login");
+        chromeDriver = WebDriverFactory.get(Config.BROWSER_CHROME, "login");
         userClient.create(user);
-        boolean isCheckoutOrderButtonVisible = new LoginPage(driver)
+        boolean isCheckoutOrderButtonVisible = new LoginPage(yandexDriver != null ? yandexDriver : chromeDriver)
                 .clickRecoverPasswordButton()
                 .clickEnterButton()
                 .inputEmail(user.getEmail())
