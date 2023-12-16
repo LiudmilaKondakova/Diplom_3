@@ -10,11 +10,11 @@ public class RegistrationPage {
         this.driver = driver;
     }
 
-    private final By nameField = By.xpath("/html/body/div/div/main/div/form/fieldset[1]/div/div/input");
-    private final By emailField = By.xpath("/html/body/div/div/main/div/form/fieldset[2]/div/div/input");
-    private final By passwordField = By.xpath("/html/body/div/div/main/div/form/fieldset[3]/div/div/input");
-    private final By registrationButton = By.xpath("/html/body/div/div/main/div/form/button");
-    private final By incorrectPasswordError = By.xpath("/html/body/div/div/main/div/form/fieldset[3]/div/p");
+    private final By nameField = By.xpath(".//fieldset[1]/div/div/input");
+    private final By emailField = By.xpath(".//fieldset[2]/div/div/input");
+    private final By passwordField = By.xpath(".//fieldset[3]/div/div/input");
+    private final By registrationButton = By.xpath(".//form/button");
+    private final By incorrectPasswordError = By.xpath(".//fieldset[3]/div/p");
     private final By enterButton = By.xpath("/html/body/div/div/main/div/div/p/a");
 
     public RegistrationPage inputName(String name) {

@@ -12,14 +12,14 @@ public class MainPage {
 
     private final By enterToAccountButton = By.xpath("/html/body/div/div/header/nav/a/p");
     private final By personalAreaButton = By.xpath("/html/body/div/div/header/nav/a");
-    private final By checkoutOrderButton = By.xpath("/html/body/div/div/main/section[2]/div/button");
+    private final By checkoutOrderButton = By.xpath(".//section[2]/div/button");
     private final By stellarIsBurgerLogo = By.xpath("/html/body/div/div/header/nav/div/a/svg");
-    private final By bunsSelectionButton = By.xpath("/html/body/div/div/main/section[1]/div[1]/div[1]");
-    private final By sousesSelectionButton = By.xpath("/html/body/div/div/main/section[1]/div[1]/div[2]");
-    private final By fillingsSelectionButton = By.xpath("/html/body/div/div/main/section[1]/div[1]/div[3]");
-    private final By bunsSelection = By.xpath("/html/body/div/div/main/section[1]/div[2]/ul[1]");
-    private final By sousesSelection = By.xpath("/html/body/div/div/main/section[1]/div[2]/ul[2]");
-    private final By fillingsSelection = By.xpath("/html/body/div/div/main/section[1]/div[2]/ul[3]");
+    private final By bunsSelectionButton = By.xpath(".//section[1]/div[1]/div[1]");
+    private final By sousesSelectionButton = By.xpath(".//section[1]/div[1]/div[2]");
+    private final By fillingsSelectionButton = By.xpath(".//section[1]/div[1]/div[3]");
+    private final By bunsSelection = By.xpath(".//section[1]/div[2]/ul[1]");
+    private final By sousesSelection = By.xpath(".//section[1]/div[2]/ul[2]");
+    private final By fillingsSelection = By.xpath(".//section[1]/div[2]/ul[3]");
     private final By enterButtonNotLogin = By.xpath("/html/body/div/div/main/div/div/p/a");
     private final By enterLoginHeader = By.xpath("/html/body/div/div/main/div/h2");
 
